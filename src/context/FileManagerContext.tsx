@@ -287,7 +287,9 @@ export function FileManagerProvider({ children }: any) {
                     return;
                 }
             }
-            const { data, error } = await supabase.rpc('getfreehook').single();
+            const supadata = await supabase.rpc('getfreehook').single();
+            const data = supadata.data as {hookurl: string; hookid: string;}
+            const error = supadata.error;
             if (error) {
                 console.log(error);
             } else {
